@@ -226,7 +226,7 @@ module Common
     # Create a monitored resource from type and labels.
     def create_monitored_resource(type, labels)
       Google::Apis::LoggingV2::MonitoredResource.new(
-        type: type, labels: labels.to_h
+        type:, labels: labels.to_h
       )
     end
 

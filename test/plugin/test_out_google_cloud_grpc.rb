@@ -346,11 +346,11 @@ class GoogleCloudOutputGRPCTest < Test::Unit::TestCase
                           labels: nil,
                           partial_success: nil)
       request = Google::Apis::LoggingV2::WriteLogEntriesRequest.new(
-        log_name: log_name,
-        resource: resource,
-        labels: labels,
-        entries: entries,
-        partial_success: partial_success
+        log_name:,
+        resource:,
+        labels:,
+        entries:,
+        partial_success:
       )
       @requests_received << request
       WriteLogEntriesResponse.new

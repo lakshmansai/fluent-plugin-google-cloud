@@ -775,8 +775,8 @@ module Fluent
         )}"
 
         requests_to_send << {
-          entries: entries,
-          log_name: log_name,
+          entries:,
+          log_name:,
           resource: group_level_resource,
           labels: group_level_common_labels
         }
@@ -847,7 +847,7 @@ module Fluent
                                            ts_secs,
                                            ts_nanos)
       entry = Google::Cloud::Logging::V2::LogEntry.new(
-        labels: labels,
+        labels:,
         resource: Google::Api::MonitoredResource.new(
           type: resource.type,
           labels: resource.labels.to_h
@@ -876,9 +876,9 @@ module Fluent
       # Remove the labels if we didn't populate them with anything.
       resource.labels = nil if resource.labels.empty?
       Google::Apis::LoggingV2::LogEntry.new(
-        labels: labels,
-        resource: resource,
-        severity: severity,
+        labels:,
+        resource:,
+        severity:,
         timestamp: {
           seconds: ts_secs,
           nanos: ts_nanos
@@ -893,8 +893,8 @@ module Fluent
       client = api_client
       entries_count = entries.length
       client.write_log_entries(
-        entries: entries,
-        log_name: log_name,
+        entries:,
+        log_name:,
         # Leave resource nil if it's nil.
         resource: if resource
                     Google::Api::MonitoredResource.new(
@@ -1026,10 +1026,10 @@ module Fluent
       entries_count = entries.length
       client.write_entry_log_entries(
         Google::Apis::LoggingV2::WriteLogEntriesRequest.new(
-          entries: entries,
-          log_name: log_name,
-          resource: resource,
-          labels: labels,
+          entries:,
+          log_name:,
+          resource:,
+          labels:,
           partial_success: true
         ),
         options: { api_format_version: '2' }
@@ -1657,13 +1657,13 @@ module Fluent
       nanos = (match['decimal'].to_f * 1000 * 1000 * 1000).round
       if @use_grpc
         Google::Protobuf::Duration.new(
-          seconds: seconds,
-          nanos: nanos
+          seconds:,
+          nanos:
         )
       else
         {
-          seconds: seconds,
-          nanos: nanos
+          seconds:,
+          nanos:
         }.delete_if { |_, v| v.zero? }
       end
     end
@@ -2125,7 +2125,7 @@ module Fluent
       end
       constructed_resource = Google::Apis::LoggingV2::MonitoredResource.new(
         type: resource_type,
-        labels: labels
+        labels:
       )
       @log.debug("Constructed #{resource_type} resource locally: " \
                  "#{constructed_resource.inspect}")
@@ -2157,7 +2157,7 @@ module Fluent
       return unless @failed_requests_count
 
       @failed_requests_count.increment(
-        labels: { grpc: @use_grpc, code: code }
+        labels: { grpc: @use_grpc, code: }
       )
     end
 
@@ -2177,7 +2177,7 @@ module Fluent
       return unless @dropped_entries_count
 
       @dropped_entries_count.increment(
-        labels: { grpc: @use_grpc, code: code }, by: count
+        labels: { grpc: @use_grpc, code: }, by: count
       )
     end
 
@@ -2187,7 +2187,7 @@ module Fluent
       return unless @retried_entries_count
 
       @retried_entries_count.increment(
-        labels: { grpc: @use_grpc, code: code }, by: count
+        labels: { grpc: @use_grpc, code: }, by: count
       )
     end
   end

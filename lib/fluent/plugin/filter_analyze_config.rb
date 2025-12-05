@@ -19,7 +19,6 @@ require 'fluent/plugin_helper'
 require 'googleauth'
 require 'google/apis/logging_v2'
 require 'open-uri'
-require 'set'
 
 require_relative 'common'
 require_relative 'monitoring'
@@ -336,9 +335,9 @@ module Fluent
           end
           enabled_plugins_counter.increment(
             labels: {
-              plugin_name: plugin_name,
-              is_default_plugin: is_default_plugin,
-              has_default_config: has_default_config,
+              plugin_name:,
+              is_default_plugin:,
+              has_default_config:,
               has_ruby_snippet: embedded_ruby?(e)
             },
             by: 1

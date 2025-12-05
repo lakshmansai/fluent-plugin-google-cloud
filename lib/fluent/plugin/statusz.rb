@@ -26,8 +26,8 @@ module Statusz
                         minutes: (uptime / 60) % 60,
                         seconds: uptime % 60)
     ERB.new(STATUSZ_TMPL).result_with_hash(
-      plugin: plugin,
-      uptime_str: uptime_str
+      plugin:,
+      uptime_str:
     )
   end
 end

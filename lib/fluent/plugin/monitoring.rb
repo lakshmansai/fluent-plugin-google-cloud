@@ -155,7 +155,7 @@ module Monitoring
       @recorders[prefix].register_view(
         OpenCensus::Stats::View.new(
           name: translator.name,
-          measure: measure,
+          measure:,
           aggregation: stats_aggregation,
           description: docstring,
           columns: translator.view_labels.map(&:to_s)
